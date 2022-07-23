@@ -16,7 +16,24 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 console.log("connected to mongodb");
 
 async function run() {
+    try{
+        await client.connect();
+        const database = client.db("bookDeliverySystem");
+        const booksCollection = database.collection("books");
+        // const registeredUserCollection = database.collection("registeredUser");
 
+        // POST API
+        app.post('/books', async(req, res) => {
+            const books = req.body;
+            console.log(books);
+            const result = await booksCollection.insertOne(books);
+            console.log("book inserted -", result);
+            res.json(result);
+          });
+    }
+    finally{
+        // await client.close();
+    }
 }
 run().catch(console.dir);
 
