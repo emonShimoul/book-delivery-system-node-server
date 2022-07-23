@@ -24,12 +24,20 @@ async function run() {
 
         // POST API
         app.post('/books', async(req, res) => {
-            const books = req.body;
-            console.log(books);
-            const result = await booksCollection.insertOne(books);
-            console.log("book inserted -", result);
-            res.json(result);
-          });
+          const books = req.body;
+          console.log(books);
+          const result = await booksCollection.insertOne(books);
+          console.log("book inserted -", result);
+          res.json(result);
+        });
+
+        // Get all books
+        app.get('/books', async(req, res) => {
+          const cursor = booksCollection.find({});
+          const books = await cursor.toArray();
+          console.log(books);
+          res.json(books);
+        });
     }
     finally{
         // await client.close();
