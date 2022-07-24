@@ -20,7 +20,7 @@ async function run() {
         await client.connect();
         const database = client.db("bookDeliverySystem");
         const booksCollection = database.collection("books");
-        // const registeredUserCollection = database.collection("registeredUser");
+        const purchaseBookDetails = database.collection("purchasedBook");
 
         // POST API
         app.post('/books', async(req, res) => {
@@ -37,6 +37,14 @@ async function run() {
           const books = await cursor.toArray();
           console.log(books);
           res.json(books);
+        });
+
+        // Purchased Book
+        app.post('/purchasedBook', async(req, res) => {
+          const purchasedBookInfo = req.body;
+          // const result = await purchaseBookDetails.insertOne(purchasedBookInfo);
+          console.log("purchased book -", purchasedBookInfo);
+          // res.json(result);
         });
     }
     finally{
