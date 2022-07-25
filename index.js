@@ -54,14 +54,14 @@ async function run() {
         })
 
         // GET API (display purchased book for specific user's)
-        // app.get('/purchasedBooks/:email', async(req, res) => {
-        //   const email = req.params.email;
-        //   // console.log(email);
-        //   const query = { email: { $in: [ email ] } }
-        //   const cursor = purchasedBookCollection.find(query);
-        //   const purchasedBookInfo = await cursor.toArray();
-        //   res.json(purchasedBookInfo);
-        // });
+        app.get('/purchasedBooks/:email', async(req, res) => {
+          const email = req.params.email;
+          // console.log(email);
+          const query = { email: { $in: [ email ] } }
+          const cursor = purchasedBookCollection.find(query);
+          const purchasedBookInfo = await cursor.toArray();
+          res.json(purchasedBookInfo);
+        });
 
     }
     finally{
