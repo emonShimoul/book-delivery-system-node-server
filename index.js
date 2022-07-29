@@ -47,13 +47,14 @@ async function run() {
           res.json(result);
         });
 
+        // Get all purchased Book
         app.get('/purchasedBooks', async(req, res) => {
           const cursor = purchasedBookCollection.find({});
           const purchasedBookInfo = await cursor.toArray();
           res.json(purchasedBookInfo);
         })
 
-        // GET API (display purchased book for specific user's)
+        // GET API (get purchased book for specific user's)
         app.get('/purchasedBooks/:email', async(req, res) => {
           const email = req.params.email;
           // console.log(email);
